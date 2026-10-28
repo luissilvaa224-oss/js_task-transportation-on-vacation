@@ -34,3 +34,27 @@
 
     return y;
     ```
+
+numbers.reduce = function(callback, initialValue) {
+  const hasInitialValue = initialValue !== undefined;
+  const arrayIsEmpty = this.length === 0;
+
+  if (!hasInitialValue && arrayIsEmpty) {
+    throw new TypeError('Reduce of empty array with no initial value');
+  }
+
+  let accumulator = initialValue;
+  let startIndex = 0;
+
+  if (!hasInitialValue) {
+    accumulator = this[0];
+    startIndex = 1;
+  }
+
+  for (let index = startIndex; index < this.length; index++) {
+    accumulator = callback(accumulator, this[index], index, this);
+  }
+
+  return accumulator;
+};
+
